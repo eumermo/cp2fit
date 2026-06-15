@@ -1,45 +1,38 @@
-# Executando com Docker - para quem quiser se aventurar :)
+# sv
 
-O projeto está configurado para rodar completamente com Docker Compose, incluindo PostgreSQL e as aplicações Node.js.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Pré-requisitos
+## Creating a project
 
-- Docker
-- Docker Compose
-
-## Comandos
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-# Subir todos os serviços (primeira vez)
-docker-compose up -d
+# create a new project in the current directory
+npx sv create
 
-# Ver logs
-docker-compose logs -f
-
-# Parar serviços
-docker-compose down
-
-# Rebuild das imagens
-docker-compose up --build
-
-# Limpar volumes (reset completo do banco)
-docker-compose down -v
+# create a new project in my-app
+npx sv create my-app
 ```
 
-## Serviços Disponíveis
+## Developing
 
-- **Aplicação Completa**: http://localhost (porta 80)
-- **API Backend**: http://localhost:3000 (acesso direto)
-- **Frontend**: http://localhost:5173 (acesso direto)
-- **PostgreSQL**: localhost:5432
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-## Estrutura dos Containers
+```bash
+npm run dev
 
-- `elefantinho_db`: PostgreSQL 15 com dados persistentes
-- `elefantinho_api`: Backend Node.js/Express (imagem base + volumes)
-- `elefantinho_frontend`: Frontend SvelteKit (imagem base + volumes)
-- `elefantinho_nginx`: Proxy reverso (unifica acesso na porta 80)
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-O banco de dados é inicializado automaticamente com:
-- Criação do usuário `elefantinho` com permissões completas
-- Execução do `schema_create.sql` com tabelas e dados de exemplo
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
